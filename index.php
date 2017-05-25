@@ -23,7 +23,7 @@ $answered = false;
 
   if(isset($_COOKIE["id"]))
   {
-    $filepath = "dir/".$_COOKIE["id"];
+    $filepath = "./dir/".$_COOKIE["id"];
 
       if(file_exists($filepath))
       {
@@ -57,14 +57,18 @@ $answered = false;
 <body>
 
 
+<div>ソースファイル類は<a href="https://github.com/mugisaku/questionnaire.git">こちら</a></div>
+
+<hr>
+
 <div>
 
 <?php
 
-$question_list = load_question_file("questions.txt");
+$question_list = load_question_file("./questions.txt");
 
 
-$ans_table = load_dir("dir/");
+$ans_table = load_dir("./dir/");
 
 
 aggregate($question_list,$ans_table);
@@ -76,7 +80,7 @@ $number_of_entries = count($ans_table);
   if($answered)
   {
     echo "あなたは以前に回答しています<p>";
-    echo "回答を変更して送信すれば、更新することができます<hr>";
+    echo "選択を変更して、再び送信すれば、回答を更新することができます<hr>";
  }
 
 

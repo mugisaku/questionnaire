@@ -6,7 +6,7 @@ lock($number_of_count_for_trying=20,$time_for_waiting=1000000)
 {
     for($n = 0;  $n < $number_of_count_for_trying;  ++$n)
     {
-        if(@rename("_UNLOCKED","_LOCKED.".getmypid()))
+        if(rename("./_UNLOCKED","./_LOCKED.".getmypid()))
         {
           return true;
         }
@@ -23,7 +23,7 @@ lock($number_of_count_for_trying=20,$time_for_waiting=1000000)
 function
 unlock()
 {
-  return rename("_LOCKED.".getmypid(),"_UNLOCKED");
+  return rename("./_LOCKED.".getmypid(),"./_UNLOCKED");
 }
 
 

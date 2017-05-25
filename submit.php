@@ -10,7 +10,7 @@ require_once"question.php";
 function
 write($f)
 {
-  $question_list = load_question_file("questions.txt");
+  $question_list = load_question_file("./questions.txt");
 
   $table = array();
 
@@ -70,7 +70,7 @@ accept()
 
   $filename = sprintf("%016x",time());
 
-  $f = fopen("dir/_TMP".$filename,"wb");
+  $f = fopen("./dir/_TMP".$filename,"wb");
 
     if(!$f)
     {
@@ -84,7 +84,7 @@ accept()
 
     if(isset($_COOKIE["id"]))
     {
-        if(@unlink("dir/".$_COOKIE["id"]))
+        if(@unlink("./dir/".$_COOKIE["id"]))
         {
           $result = RES_updated;
         }
@@ -94,7 +94,7 @@ accept()
     }
 
 
-    if(!rename("dir/_TMP".$filename,"dir/".$filename))
+    if(!rename("./dir/_TMP".$filename,"dir/".$filename))
     {
       $msg = "新ファイルを名前変更できませんでした";
 

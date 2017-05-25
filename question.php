@@ -242,7 +242,7 @@ aggregate(&$qlist,$dir)
 {
     foreach($dir as $value)
     {
-      $f = fopen("dir/".$value,"rb");
+      $f = fopen("./dir/".$value,"rb");
 
         if($f)
         {
