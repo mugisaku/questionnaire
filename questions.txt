@@ -13,7 +13,7 @@
   どちらも関心がない;
 
 2,使用しているOSは何ですか*?
-  Window:
+  Windows:
   macOS:
   Linux:
   その他;

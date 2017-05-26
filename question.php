@@ -42,6 +42,11 @@ Answer
     $this->checked = true;
   }
 
+  function uncheck()
+  {
+    $this->checked = false;
+  }
+
   function to_html($number_of_entries)
   {
     $type = $this->question->is_multi()? "checkbox":"radio";
@@ -157,15 +162,35 @@ Question
               {
                 $this->answer_table[] = new Answer($this,$n++,implode($text));
 
-                return;
+                goto FINISH;
               }
 
 
            $text[] = $c;
          }
       }
+
+FINISH:
+      if(!$this->multi)
+      {
+        $this->answer_table[0]->check();
+      }
   }
 
+
+  function check($i)
+  {
+      if(!$this->multi)
+      {
+          foreach($this->answer_table as $a)
+          {
+            $a->uncheck();
+          }
+      }
+
+
+    $this->answer_table[$i]->check();
+  }
 
   function get_text()
   {
@@ -246,7 +271,7 @@ aggregate(&$qlist,$dir)
 
         if($f)
         {
-          $owner = isset($_COOKIE["id"])? ($_COOKIE["id"] == $value):false;
+          $is_owner = isset($_COOKIE["id"])? ($_COOKIE["id"] == $value):false;
 
           $n = fget_be16c($f);
 
@@ -256,6 +281,8 @@ aggregate(&$qlist,$dir)
 
               $an = fget_8c($f);
 
+              $ai = null;
+
                 while($an--)
                 {
                   $ai = fget_8c($f);
@@ -264,10 +291,16 @@ aggregate(&$qlist,$dir)
 
                   $a->increase_count();
 
-                    if($owner)
+                    if($is_owner && $q->is_multi())
                     {
                       $a->check();
                     }
+                }
+
+
+                if($ai && $is_owner && !$q->is_multi())
+                {
+                  $q->check($ai);
                 }
             }
 

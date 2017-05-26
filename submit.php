@@ -155,7 +155,7 @@ echo "<hr>";
   switch($result)
   {
 case(RES_failure ): echo"時間を置いて、再試行してください";break;
-case(RES_inserted): echo"投票しました";break;
+case(RES_inserted): echo"回答を受領しました";break;
 case(RES_updated ): echo"回答を更新しました";break;
   }
 ?>
